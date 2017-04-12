@@ -20,4 +20,6 @@ public class Player {
     private void knuff(Collection<Pjäs> pjäser) {
 
     }
+
+
 }

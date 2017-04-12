@@ -4,15 +4,19 @@ import java.util.*;
 
 public class Spelplan {
 
+    // Four Nests
     private Nest blue;
     private Nest yellow;
     private Nest green;
     private Nest red;
+    static final int PJÄSER_PER_NEST = 4;
 
-    public static final int PJÄSER_PER_NEST = 4;
+    // 60 Rutor
+    private Ruta rutor;
 
     private static Spelplan instance = null;
 
+    // Singleton
     private Spelplan() {
         blue = new Nest(Lag.BLUE, new HashSet<>());
         yellow = new Nest(Lag.YELLOW, new HashSet<>());
@@ -27,7 +31,6 @@ public class Spelplan {
             yellow.addPjäs(Arrays.asList(new Pjäs(Lag.YELLOW)));
             green.addPjäs(Arrays.asList(new Pjäs(Lag.GREEN)));
             red.addPjäs(Arrays.asList(new Pjäs(Lag.RED)));
-
         }
     }
 
@@ -54,7 +57,21 @@ public class Spelplan {
         return red;
     }
 
-
+    public void putInNest(Collection<Pjäs> pjäser, Lag lag) {
+        switch (lag) {
+            case RED:
+                red.addPjäs(pjäser);
+                break;
+            case BLUE:
+                blue.addPjäs(pjäser);
+                break;
+            case GREEN:
+                green.addPjäs(pjäser);
+                break;
+            case YELLOW:
+                yellow.addPjäs(pjäser);
+        }
+    }
 
     // Nested classes
     class Ruta {
@@ -64,7 +81,7 @@ public class Spelplan {
 
         private Collection<Pjäs> pjäser;
 
-        public Ruta() {
+        Ruta() {
             pjäser = null;
         }
 
@@ -75,24 +92,6 @@ public class Spelplan {
         public void removePjäs() {
             if (pjäser != null) {
                 pjäser.clear();
-            }
-        }
-
-        private void putInNest(Collection<Pjäs> pjäser) {
-            Iterator<Pjäs> pjäs = pjäser.iterator();
-            Lag lag = pjäs.next().getFärg();
-            switch (lag) {
-                case RED:
-                    red.addPjäs(pjäser);
-                    break;
-                case BLUE:
-                    blue.addPjäs(pjäser);
-                    break;
-                case GREEN:
-                    green.addPjäs(pjäser);
-                    break;
-                case YELLOW:
-                    yellow.addPjäs(pjäser);
             }
         }
 

@@ -17,7 +17,7 @@ public class Dice {
         return instance;
     }
 
-    public int kasta() {
+    public int dieThrow() {
         return (int) (Math.random() * 6 + 1);
     }
 

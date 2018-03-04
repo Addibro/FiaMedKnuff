@@ -3,18 +3,18 @@ package com.fiamedknuff;
 import java.util.Collection;
 
 public class Piece {
-    private Ludo.Team lag;
+    private Ludo.Color team;
     private boolean isInNest;
     private boolean isOutOfGame;
 
-    public Piece(Ludo.Team lag) {
-        this.lag = lag;
+    Piece(Ludo.Color team) {
+        this.team= team;
         isInNest = true;
         isOutOfGame = false;
     }
 
-    public Ludo.Team getLag() {
-        return lag;
+    Ludo.Color getLag() {
+        return team;
     }
 
     public boolean isInNest() {
@@ -25,8 +25,8 @@ public class Piece {
         return isOutOfGame;
     }
 
-    public void putBackInNest(Collection<Piece> pjäser) {
-        Ludo.getInstance().putInNest(pjäser, getLag());
+    public void putBackInNest(Piece pieces) {
+        Ludo.getInstance().putInNest(pieces, getLag());
         isInNest = true;
 
     }

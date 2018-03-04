@@ -3,9 +3,9 @@ package com.fiamedknuff;
 import java.util.Collection;
 
 public class Player {
-    private Ludo.Team lag;
+    private Ludo.Color lag;
 
-    public Player(Ludo.Team lag) {
+    public Player(Ludo.Color lag) {
         this.lag = lag;
     }
 

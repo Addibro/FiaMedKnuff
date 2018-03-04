@@ -9,31 +9,32 @@ public class Ludo {
     private Nest yellow;
     private Nest green;
     private Nest red;
-    static final int PIECES_PER_NEST = 4;
-
-    // 60 Rutor
-    private Square rutor;
 
     // how to represent the board game
-    private LinkedList<Square> squares;
+    private Node<Square> squares;
 
     private static Ludo instance = null;
 
     // Singleton
     private Ludo() {
-        blue = new Nest(Team.BLUE, new HashSet<>());
-        yellow = new Nest(Team.YELLOW, new HashSet<>());
-        green = new Nest((Team.GREEN), new HashSet<>());
-        red = new Nest(Team.RED, new HashSet<>());
+        createBoard();
+        blue = new Nest(Color.BLUE, new HashSet<>());
+        yellow = new Nest(Color.YELLOW, new HashSet<>());
+        green = new Nest((Color.GREEN), new HashSet<>());
+        red = new Nest(Color.RED, new HashSet<>());
         populateNests();
     }
 
+    private void createBoard() {
+        for ()
+    }
+
     private void populateNests() {
-        for (int i = 0; i < PIECES_PER_NEST; i++) {
-            blue.addPjäs(Arrays.asList(new Piece(Team.BLUE)));
-            yellow.addPjäs(Arrays.asList(new Piece(Team.YELLOW)));
-            green.addPjäs(Arrays.asList(new Piece(Team.GREEN)));
-            red.addPjäs(Arrays.asList(new Piece(Team.RED)));
+        for (int i = 0; i < 4; i++) {
+            blue.addPiece(new Piece(Color.BLUE));
+            yellow.addPiece(new Piece(Color.YELLOW));
+            green.addPiece(new Piece(Color.GREEN));
+            red.addPiece(new Piece(Color.RED));
         }
     }
 
@@ -60,27 +61,24 @@ public class Ludo {
         return red;
     }
 
-    public void putInNest(Collection<Piece> pjäser, Team lag) {
-        switch (lag) {
+    public void putInNest(Piece piece, Color color) {
+        switch (color) {
             case RED:
-                red.addPjäs(pjäser);
+                red.addPiece(piece);
                 break;
             case BLUE:
-                blue.addPjäs(pjäser);
+                blue.addPiece(piece);
                 break;
             case GREEN:
-                green.addPjäs(pjäser);
+                green.addPiece(piece);
                 break;
             case YELLOW:
-                yellow.addPjäs(pjäser);
+                yellow.addPiece(piece);
         }
     }
 
     // Nested classes
     class Square {
-
-        private Square framför; // en ruta kan ha en annan ruta framför sig
-        private Square höger; // varje ruta innan de färgkodade rutorna har en ruta till höger
 
         private Collection<Piece> pieces;
 
@@ -92,41 +90,45 @@ public class Ludo {
             return pieces;
         }
 
-        public void removePiece() {
+        public boolean pushPiece(Piece piece) {
+            return pieces.contains(piece) && pieces.remove(piece);
+        }
+
+        // Can only add one Piece at the time to each square
+        public void addPiece(Piece piece) {
+            pieces.add(piece);
+        }
+
+        public void removePieces() {
             if (pieces != null) {
                 pieces.clear();
             }
         }
-
-        // Can only add one Piece at the time to each square
-        public void addPjäs(Piece piece) {
-            pieces.add(piece);
-        }
     }
 
     class Nest {
-        private Team lag;
+        private Color color;
         private Collection<Piece> pieces;
 
-        public Nest(Team lag, Collection<Piece> pieces) {
-            this.lag = lag;
+        Nest(Color color, Collection<Piece> pieces) {
+            this.color = color;
             this.pieces = pieces;
         }
 
-        public void addPjäs(Collection<Piece> pieces) {
-            this.pieces = pieces;
+        public void addPiece(Piece piece) {
+            this.pieces.add(piece);
         }
 
         public Collection<Piece> getPieces() {
             return pieces;
         }
 
-        public Team getLag() {
-            return lag;
+        public Color getColor() {
+            return color;
         }
     }
 
-    static enum Team {
+    enum Color {
         BLUE,
         GREEN,
         YELLOW,

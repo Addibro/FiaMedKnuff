@@ -11,7 +11,10 @@ public class Ludo {
     private Nest red;
 
     // how to represent the board game
-    private Node<Square> squares;
+    private SquareNode<Square> squares;
+
+    // main outer board
+    private static int OUTER_BOARD_SQUARES = 52;
 
     private static Ludo instance = null;
 
@@ -26,7 +29,7 @@ public class Ludo {
     }
 
     private void createBoard() {
-        for ()
+
     }
 
     private void populateNests() {
